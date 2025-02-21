@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
+import Header from '@/components/Header'
+import { Providers } from './providers'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'nextjs-app-template',
-  description: 'A template for create nextjs app project',
+  title: 'AI with MCP',
+  description: 'Enabling the future with AI and MCP.',
 }
 
 export default function RootLayout({
@@ -14,7 +16,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Providers
+          attribute="class"
+          defaultTheme="system"
+        >
+          <Header />
+          <main>
+            {children}
+          </main>
+        </Providers>
       </body>
     </html>
   )

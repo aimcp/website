@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
+@plugin './icons.ts';
 
 @custom-variant dark (&:is(.dark *));
 
