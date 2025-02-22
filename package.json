@@ -1,8 +1,8 @@
 {
-  "name": "nextjs-app-template",
+  "name": "aimcp.github.io",
   "version": "0.1.0",
   "private": true,
-  "description": "A template for create nextjs app project",
+  "description": "The portal for aimcp",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
