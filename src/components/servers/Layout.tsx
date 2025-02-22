@@ -87,7 +87,7 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
                 {server.name}
                 <Link href={server.repo_url} target="_blank">
                   <Button className="size-8 transition-transform scale-0 group-hover:scale-100" variant="ghost" size="icon">
-                    <ExternalLink />
+                    <ExternalLink size={16} />
                   </Button>
                 </Link>
               </CardTitle>
