@@ -20,7 +20,7 @@ export default function Header() {
       <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-            <Link href="https://github.com/aimcp" legacyBehavior passHref>
+            <Link href="/mcp/servers" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 <div className="flex items-center gap-1">
                   <i className="icon-[solar--server-square-cloud-linear] text-xl" />
