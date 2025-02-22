@@ -4,7 +4,10 @@ import type { McpServerItem } from '@/types'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { ExternalLink } from 'lucide-react'
+import Link from 'next/link'
 import { type FC, useMemo, useState } from 'react'
+import { Button } from '../ui/button'
 
 interface McpServersLayoutProps {
   servers: McpServerItem[]
@@ -78,9 +81,16 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
       </div>
       <div className="grid grid-cols-4 gap-4">
         {serversFiltered.map(server => (
-          <Card key={server.repo_url}>
+          <Card key={server.repo_url} className="group">
             <CardHeader>
-              <CardTitle>{server.name}</CardTitle>
+              <CardTitle className="flex h-8 justify-between items-center gap-2">
+                {server.name}
+                <Link href={server.repo_url} target="_blank">
+                  <Button className="size-8 transition-transform scale-0 group-hover:scale-100" variant="ghost" size="icon">
+                    <ExternalLink />
+                  </Button>
+                </Link>
+              </CardTitle>
               <div className="flex items-center gap-1 mt-1">
                 <img alt="GitHub License" src={`https://img.shields.io/github/license/${getGithubId(server.repo_url)}?style=plastic`} />
                 <img alt="GitHub License" src={`https://img.shields.io/github/stars/${getGithubId(server.repo_url)}?style=plastic`} />
