@@ -12,7 +12,7 @@ export default function Header() {
   const { setTheme } = useTheme()
 
   return (
-    <header className="fixed top-0 w-full backdrop-blur-lg h-14 p-2 flex items-center justify-between border-b border-border">
+    <header className="fixed top-0 w-full backdrop-blur-lg h-14 py-2 px-6 flex items-center justify-between border-b border-border">
       <Link className="flex cursor-pointer items-center gap-1" href="/">
         <Image src="/logo.svg" alt="logo" width={36} height={36} />
         <label className="text-xl font-medium cursor-pointer">AI with MCP</label>
