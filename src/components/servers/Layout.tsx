@@ -108,8 +108,11 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
         </div>
       </div>
       <div className="flex-1 flex flex-col items-center gap-4">
-        <div className="w-full max-w-80">
+        <div className="w-full max-w-80 flex items-center gap-2">
           <Input placeholder="Search MCP server by name" value={searchKey} onChange={e => onSearchKeyChange(e.target.value)} />
+          <Link href="https://github.com/aimcp/awesome-mcp/issues" target="_blank">
+            <Button>Add</Button>
+          </Link>
         </div>
         <div className="grid grid-cols-3 gap-4">
           {serversFiltered.map(server => (
