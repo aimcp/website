@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Header from '@/components/Header'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { GoogleTagManager } from '@next/third-parties/google'
 import { Providers } from './providers'
 import './globals.css'
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           </main>
         </Providers>
       </body>
+      <GoogleTagManager gtmId="GTM-MQPNHVDD" />
     </html>
   )
 }

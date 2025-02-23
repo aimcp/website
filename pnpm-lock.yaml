@@ -11,6 +11,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^4.1.1
         version: 4.1.1(react-hook-form@7.54.2(react@19.0.0-rc-66855b96-20241106))
+      '@next/third-parties':
+        specifier: ^15.1.7
+        version: 15.1.7(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@radix-ui/react-dialog':
         specifier: ^1.1.6
         version: 1.1.6(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -545,6 +548,12 @@ packages:
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
+
+  '@next/third-parties@15.1.7':
+    resolution: {integrity: sha512-wDAh/gW+WFT7jPYmGEGtNeLC74D8+hu3S6YJOpcfC/6uBMSC7yjh0QW1/RPYKziVnjqe6O4jR0AhbN0uuS8CZw==}
+    peerDependencies:
+      next: ^13.0.0 || ^14.0.0 || ^15.0.0
+      react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -3162,6 +3171,9 @@ packages:
     resolution: {integrity: sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==}
     engines: {node: '>=6'}
 
+  third-party-capital@1.0.20:
+    resolution: {integrity: sha512-oB7yIimd8SuGptespDAZnNkzIz+NWaJCu2RMsbs4Wmp9zSDUM8Nhi3s2OOcqYuv3mN4hitXc8DVx+LyUmbUDiA==}
+
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
@@ -3798,6 +3810,12 @@ snapshots:
 
   '@next/swc-win32-x64-msvc@15.0.3':
     optional: true
+
+  '@next/third-parties@15.1.7(next@15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+    dependencies:
+      next: 15.0.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      react: 19.0.0-rc-66855b96-20241106
+      third-party-capital: 1.0.20
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -6907,6 +6925,8 @@ snapshots:
   tailwindcss@4.0.7: {}
 
   tapable@2.2.1: {}
+
+  third-party-capital@1.0.20: {}
 
   tinyexec@0.3.2: {}
 
