@@ -116,8 +116,8 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
         </div>
         <div className="grid grid-cols-3 gap-4">
           {serversFiltered.map(server => (
-            <Card key={server.repo_url} className="group">
-              <CardHeader>
+            <Card key={server.repo_url} className="group gap-4">
+              <CardHeader className="gap-0">
                 <CardTitle className="flex h-8 justify-between items-center gap-2">
                   {server.name}
                   <Link href={server.repo_url} target="_blank">
@@ -126,7 +126,7 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
                     </Button>
                   </Link>
                 </CardTitle>
-                <div className="flex items-center gap-1 mt-1">
+                <div className="flex items-center gap-1">
                   <img alt="GitHub License" src={`https://img.shields.io/github/license/${getGithubId(server.repo_url)}?style=plastic`} />
                   <img alt="GitHub License" src={`https://img.shields.io/github/stars/${getGithubId(server.repo_url)}?style=plastic`} />
                   <img alt="GitHub License" src={`https://img.shields.io/github/last-commit/${getGithubId(server.repo_url)}?style=plastic`} />
