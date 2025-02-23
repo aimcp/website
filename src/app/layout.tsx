@@ -22,7 +22,7 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <Header />
-          <main className="pt-16 h-screen">
+          <main className="pt-14 h-screen">
             <ScrollArea className="h-full">
               {children}
             </ScrollArea>

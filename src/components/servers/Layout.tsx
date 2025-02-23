@@ -1,13 +1,14 @@
 'use client'
 
 import type { McpServerItem } from '@/types'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import { type FC, useMemo, useState } from 'react'
-import { Button } from '../ui/button'
+import { Label } from '../ui/label'
 
 interface McpServersLayoutProps {
   servers: McpServerItem[]
@@ -24,8 +25,14 @@ export function getGithubId(url: string) {
 
 const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
   const [searchKey, setSearchKey] = useState<string>('')
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([])
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedLanguage, setSelectedLanguage] = useState('')
+  const [selectedTag, setSelectedTag] = useState('')
+
+  const onSearchKeyChange = (val: string) => {
+    setSearchKey(val)
+    setSelectedLanguage('')
+    setSelectedTag('')
+  }
 
   const [languages, tags] = useMemo(() => {
     const languages = new Set<string>()
@@ -54,54 +61,80 @@ const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
         return false
       }
 
-      if (selectedLanguages.length && !selectedLanguages.includes(server.language)) {
+      if (selectedLanguage && server.language !== selectedLanguage) {
         return false
       }
 
-      if (selectedTags.length && !server.tags.some(tag => selectedTags.includes(tag))) {
+      if (selectedTag && !server.tags.includes(selectedTag)) {
         return false
       }
 
       return true
     })
-  }, [servers, searchKey, selectedLanguages, selectedTags])
+  }, [servers, searchKey, selectedLanguage, selectedTag])
 
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="w-full max-w-80">
-        <Input placeholder="Search MCP server by name" value={searchKey} onChange={e => setSearchKey(e.target.value)} />
-      </div>
+    <div className="flex gap-20">
       <div>
-        <ToggleGroup className="flex items-center flex-wrap gap-2" value={selectedLanguages} type="multiple" size="sm" onValueChange={setSelectedLanguages}>
-          {languages.map(language => <ToggleGroupItem key={language} value={language} aria-label={language}>{language}</ToggleGroupItem>)}
-        </ToggleGroup>
-        <ToggleGroup className="flex items-center flex-wrap gap-2 mt-2" value={selectedTags} type="multiple" size="sm" onValueChange={setSelectedTags}>
-          {tags.map(tag => <ToggleGroupItem key={tag} value={tag} aria-label={tag}>{tag}</ToggleGroupItem>)}
-        </ToggleGroup>
-      </div>
-      <div className="grid grid-cols-4 gap-4">
-        {serversFiltered.map(server => (
-          <Card key={server.repo_url} className="group">
-            <CardHeader>
-              <CardTitle className="flex h-8 justify-between items-center gap-2">
-                {server.name}
-                <Link href={server.repo_url} target="_blank">
-                  <Button className="size-8 transition-transform scale-0 group-hover:scale-100" variant="ghost" size="icon">
-                    <ExternalLink size={16} />
-                  </Button>
-                </Link>
-              </CardTitle>
-              <div className="flex items-center gap-1 mt-1">
-                <img alt="GitHub License" src={`https://img.shields.io/github/license/${getGithubId(server.repo_url)}?style=plastic`} />
-                <img alt="GitHub License" src={`https://img.shields.io/github/stars/${getGithubId(server.repo_url)}?style=plastic`} />
-                <img alt="GitHub License" src={`https://img.shields.io/github/last-commit/${getGithubId(server.repo_url)}?style=plastic`} />
+        <div>
+          <label>Languages</label>
+          <RadioGroup className="flex flex-col mt-2 flex-wrap gap-2" value={selectedLanguage} onValueChange={setSelectedLanguage}>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem id="language-all" value=""></RadioGroupItem>
+              <Label htmlFor="language-all">All</Label>
+            </div>
+            {languages.map(language => (
+              <div key={language} className="flex items-center gap-2">
+                <RadioGroupItem id={`language-${language}`} value={language}></RadioGroupItem>
+                <Label htmlFor={`language-${language}`}>{language}</Label>
               </div>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>{server.description}</CardDescription>
-            </CardContent>
-          </Card>
-        ))}
+            ))}
+          </RadioGroup>
+        </div>
+        <div className="mt-4">
+          <label>Tags</label>
+          <RadioGroup className="flex flex-col flex-wrap gap-2 mt-2" value={selectedTag} onValueChange={setSelectedTag}>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem id="tag-all" value=""></RadioGroupItem>
+              <Label htmlFor="tag-all">All</Label>
+            </div>
+            {tags.map(tag => (
+              <div key={tag} className="flex items-center gap-2">
+                <RadioGroupItem id={`tag-${tag}`} value={tag}></RadioGroupItem>
+                <Label htmlFor={`tag-${tag}`}>{tag}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+      </div>
+      <div className="flex-1 flex flex-col items-center gap-4">
+        <div className="w-full max-w-80">
+          <Input placeholder="Search MCP server by name" value={searchKey} onChange={e => onSearchKeyChange(e.target.value)} />
+        </div>
+        <div className="grid grid-cols-3 gap-4">
+          {serversFiltered.map(server => (
+            <Card key={server.repo_url} className="group">
+              <CardHeader>
+                <CardTitle className="flex h-8 justify-between items-center gap-2">
+                  {server.name}
+                  <Link href={server.repo_url} target="_blank">
+                    <Button className="size-8 transition-transform scale-0 group-hover:scale-100" variant="ghost" size="icon">
+                      <ExternalLink size={16} />
+                    </Button>
+                  </Link>
+                </CardTitle>
+                <div className="flex items-center gap-1 mt-1">
+                  <img alt="GitHub License" src={`https://img.shields.io/github/license/${getGithubId(server.repo_url)}?style=plastic`} />
+                  <img alt="GitHub License" src={`https://img.shields.io/github/stars/${getGithubId(server.repo_url)}?style=plastic`} />
+                  <img alt="GitHub License" src={`https://img.shields.io/github/last-commit/${getGithubId(server.repo_url)}?style=plastic`} />
+                </div>
+              </CardHeader>
+              <CardContent>
+                <CardDescription>{server.description}</CardDescription>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   )
