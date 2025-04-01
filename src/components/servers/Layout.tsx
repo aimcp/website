@@ -7,23 +7,23 @@ import { Input } from '@/components/ui/input'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { ExternalLink } from 'lucide-react'
 import Link from 'next/link'
-import { type FC, useMemo, useState } from 'react'
+import { type FC, useCallback, useMemo, useState } from 'react'
 import { Label } from '../ui/label'
 
 interface McpServersLayoutProps {
   servers: McpServerItem[]
 }
 
-export function getGithubId(url: string) {
-  const match = url.match(/https:\/\/github.com\/([^/]+)\/([^/?#]+)/)
-  if (match) {
-    return `${match[1]}/${match[2]}`
-  }
-
-  return null
-}
-
 const McpServersLayout: FC<McpServersLayoutProps> = ({ servers }) => {
+  const getGithubId = useCallback((url: string) => {
+    const match = url.match(/https:\/\/github.com\/([^/]+)\/([^/?#]+)/)
+    if (match) {
+      return `${match[1]}/${match[2]}`
+    }
+
+    return null
+  }, [])
+
   const [searchKey, setSearchKey] = useState<string>('')
   const [selectedLanguage, setSelectedLanguage] = useState('')
   const [selectedTag, setSelectedTag] = useState('')
